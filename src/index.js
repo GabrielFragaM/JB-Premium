@@ -12,7 +12,7 @@ class Index extends React.Component {
   constructor(props) {
     ConfigProvider.config({
       theme: {
-        primaryColor: '#2a2a2a',
+        primaryColor: '#ffae32',
       },
     });
     super(props);

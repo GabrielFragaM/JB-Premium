@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {Form, Input, Button, Typography} from 'antd';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import './LoginPageCss.css';
+import {saveDataLocalService} from '../../services/storage.service';
+import {callApi} from "../../api/callApi";
 
 export default function LoginPage() {
 
@@ -13,9 +15,20 @@ export default function LoginPage() {
         const auth = getAuth();
         try {
             const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
-            console.log(userCredential.user);
             sessionStorage.setItem('auth', JSON.stringify(true));
-            window.location.reload();
+            console.log(userCredential.user.uid)
+            userCredential.user.getIdToken().then((token) => {
+                callApi(`${process.env.REACT_APP_API_ENV}Users/${userCredential.user.uid}`, 'GET', {}, token).then(async user => {
+                    console.log(user)
+                    saveDataLocalService(1, {
+                        userDetails: user.result,
+                        userId: userCredential.user.uid,
+                        token: token,
+                        refreshToken: userCredential.user.refreshToken,
+                    }, true);
+                    window.location.reload();
+                });
+            });
             setLoading(false);
         } catch (error) {
             console.log(error);

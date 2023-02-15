@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import SideMenu from '../SideMenu';
 import './style.css';
 import Icon from "../icon";
+import Logo from '../../img/logo.png';
 
 export default function Header() {
     let navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function Header() {
                 display: 'inline-block',
                 cursor: 'pointer',
             }}
-            src="/img/logo.png"
+            src={Logo}
         />
       </span>
             <Space>
@@ -37,14 +38,16 @@ export default function Header() {
                 <Menu
                     theme="dark"
                     mode='horizontal'
-                    style={{ flex: 'auto', justifyContent: 'end',  backgroundColor: '#2a2a2a'}}
+                    style={{ flex: 'auto', justifyContent: 'end',  backgroundColor: '#c28219'}}
                     selectable={false}
                     selectedKeys={sessionStorage.getItem('locale') === 'en' ? "en" : "pt"}
                 >
                     <Menu.SubMenu
                         key={"user"}
                         icon={<Icon icon={'UserOutlined'} />}
-                        title={JSON.parse(sessionStorage.getItem('authDetails')).userDetails.name}
+                        title={
+                            JSON.parse(sessionStorage.getItem('authDetails'))?.userDetails?.name.split(' ')[0]
+                        }
                         popupOffset={[0,0]}
                         theme={"light"}
                     >

@@ -1,18 +1,15 @@
-import {userDetails} from "./userDetails";
-import {refreshToken} from "./refreshTokenApi";
+import {userDetails} from './userDetails';
+import {refreshToken} from './refreshTokenApi';
 
 
-export async function callApi(url, method, body) {
+export async function callApi(url, method, body, token) {
     
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-    const headers = userDetails !== null ? {
+    const headers = {
         'Content-Type': 'application/json',
-        'Authorization': "Bearer " + userDetails.token
-    }: {
-        'Content-Type': 'application/json',
-        'Authorization': "Bearer"
+        'Authorization': 'Bearer ' + token
     };
+    console.log(headers)
 
     const requestOptionsBody = {
         method: method,

@@ -19,9 +19,24 @@ export default function UsersPage() {
             value: 'name'
         },
         {
+            key: 'username',
+            label: 'Usuário',
+            value: 'username'
+        },
+        {
             key: 'email',
             label: 'Email',
             value: 'email'
+        },
+        {
+            key: 'cpf',
+            label: 'CPF',
+            value: 'cpf'
+        },
+        {
+            key: 'phone',
+            label: 'Telefone',
+            value: 'phone'
         },
     ];
 
@@ -59,12 +74,6 @@ export default function UsersPage() {
                 searchFilters={options}
                 searchData={data}
                 setFilteredData={setFilteredData}
-                extra={<Button
-                    icon={<Icon icon={'FormOutlined'}/>}
-                    type={'primary'}
-                    title={'Novo Usuário'}
-                    onClick={() => addNewUser()}
-                />}
             />
             <DataTable
                 dataSource = {data === null ? [] : filteredData !== null ? filteredData : data}

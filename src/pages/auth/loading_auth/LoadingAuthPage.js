@@ -3,7 +3,6 @@ import {Row, Typography, Spin} from 'antd';
 import './LoadingAuthCss.css';
 
 
-
 export default function LoadingAuthPage() {
 
     

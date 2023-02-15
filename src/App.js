@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import { Route, Routes } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import PageLayout from './pages/PageLayout';
 import LoginPage from './pages/auth/LoginPage';
 import UsersPage from './pages/users/UsersPage';
 import UsersDetailsPage from './pages/users/UsersDetailsPage';
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
+import {getDataLocalService} from './services/storage.service';
+import LoadingAuthPage from './pages/auth/loading_auth/LoadingAuthPage';
 
 export default function App() {
-
-    const [authConfirm, setAuthConfirm] = useState(false);
 
     const firebaseConfig = {
         apiKey: 'AIzaSyBBrL5wC7VJjIKYtZHKIyMLCx1bdpZgwh4',
@@ -21,9 +21,13 @@ export default function App() {
 
     initializeApp(firebaseConfig);
 
-    function checkAuth(){
-        const auth = JSON.parse(sessionStorage.getItem('auth'));
-        if(auth){
+    const [authConfirm, setAuthConfirm] = useState(null);
+
+    async function checkAuth(){
+
+        let _authDetails = getDataLocalService(1);
+
+        if(_authDetails !== null){
             setAuthConfirm(true);
         }else{
             setAuthConfirm(false);
@@ -31,20 +35,22 @@ export default function App() {
     }
 
     useEffect(() => {
-        checkAuth();
+        checkAuth().then();
     }, []);
 
     return (
         <React.Fragment>
             {
-                authConfirm === true ?
-                    <Routes>
-                        <Route path="/" element={<PageLayout/>}>
-                            <Route path="/allusers" element={<UsersPage />}/>
-                            <Route path="/allusers/user" element={<UsersDetailsPage />}/>
-                        </Route>
-                    </Routes> :
-                    <LoginPage/>
+                authConfirm === null ?
+                    <LoadingAuthPage/> :
+                    authConfirm === true ?
+                        <Routes>
+                            <Route path="/" element={<PageLayout/>}>
+                                <Route path="/allusers" element={<UsersPage />}/>
+                                <Route path="/allusers/user" element={<UsersDetailsPage />}/>
+                            </Route>
+                        </Routes> :
+                        <LoginPage/>
             }
         </React.Fragment>
     );

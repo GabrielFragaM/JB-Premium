@@ -1,6 +1,5 @@
-import React from "react";
-import {Row, Table} from "antd";
-import {stringToUnix} from "../../services/date.service";
+import React from 'react';
+import {Row, Table} from 'antd';
 
 function DataTable(props){
 

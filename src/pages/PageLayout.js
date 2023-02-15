@@ -14,7 +14,7 @@ export default function PageLayout() {
   return (
     <>
       <Layout >
-        <Header theme="light" style={{ position: 'fixed', zIndex: 10, width: '100%', display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: '#2a2a2a'}}>
+        <Header theme="light" style={{ position: 'fixed', zIndex: 10, width: '100%', display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: '#c28219'}}>
           <PageHeader />
         </Header>
         <Layout>

@@ -38,34 +38,19 @@ export default function SideMenu() {
 
   const menu = [
     {
-      title: "Todos os Posts",
-      key: "/allposts",
-      icon: "FileTextOutlined",
-    },
-    {
-      title: "Categorias",
-      key: "/categories",
-      icon: "FolderOpenOutlined",
-      items: [
-        {
-          title: "Categorias",
-          key: "/allcategories",
-        },
-        {
-          title: "Sub Categorias",
-          key: "/allsubcategories",
-        },
-      ]
-    },
-    {
-      title: "Imagens",
-      key: "/allfiles",
-      icon: "FileImageOutlined",
-    },
-    {
       title: "Todos os Usuários",
       key: "/allusers",
       icon: "TeamOutlined",
+    },
+    {
+      title: "Loterias",
+      key: "/",
+      icon: "BookOutlined",
+    },
+    {
+      title: "Colocações",
+      key: "/",
+      icon: "FieldBinaryOutlined",
     },
   ];
 
